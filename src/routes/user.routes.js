@@ -5,6 +5,8 @@ const router = express.Router();
 const userController = require('../controllers/user.controller');
 
 router.post('/', userMiddleware.signUpValidation, userController.createUser);
-router.get('/', userMiddleware.validateToken, userController.getAllUsers);
+router.use(userMiddleware.validateToken);
+router.get('/', userController.getAllUsers);
+router.get('/:id', userController.getUserById);
 
 module.exports = router;

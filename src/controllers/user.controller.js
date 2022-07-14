@@ -12,9 +12,15 @@ const userLogin = async (req, res) => {
   res.status(200).json(result);
 };
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (_req, res) => {
   const result = await userService.getAllUsers();
   res.status(200).json(result);
 };
 
-module.exports = { createUser, userLogin, getAllUsers };
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  const result = await userService.getUserById(id);
+  res.status(200).json(result);
+};
+
+module.exports = { createUser, userLogin, getAllUsers, getUserById };
