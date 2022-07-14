@@ -1,7 +1,6 @@
 const { BlogPost, Category, PostCategory } = require('../database/models');
 
 const validateCategoryIds = async (categoryIds) => {
-  console.log('validateCategoryIds');
   const getAllCategoryIds = await Category.findAll({
     attributes: ['id'],
   });
