@@ -9,9 +9,12 @@ const validateLogin = (req, _res, next) => {
 
 const { error } = schema.validate(data);
 
-if (error) throw error;
+if (error) {
+  error.message = 'Some required fields are missing';
+  throw error;
+} 
 
-next();
+next(error);
 };
 
 module.exports = { validateLogin };

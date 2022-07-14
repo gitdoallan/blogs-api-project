@@ -1,12 +1,11 @@
 const express = require('express');
+require('express-async-errors');
 const userRouter = require('./routes/user.routes');
 const loginRouter = require('./routes/login.routes');
 const errorMiddleware = require('./middleware/error.middleware');
-
 // ...
 
 const app = express();
-require('express-async-errors');
 
 app.use(express.json());
 
