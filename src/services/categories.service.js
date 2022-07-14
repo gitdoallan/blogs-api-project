@@ -12,10 +12,20 @@ const createCategory = async (body) => {
     error.name = 'ConflictError';
     throw error;
   }
-  
+
   const result = await Category.create({ name: body });
   const { id, name } = result.dataValues;
   return { id, name };
 };
 
-module.exports = { createCategory };
+const getAllCategories = async () => {
+  const categories = await Category.findAll({
+    order: [
+      ['id', 'ASC'],
+    ],
+    attributes: ['id', 'name'],
+  });
+  return categories;
+};
+
+module.exports = { createCategory, getAllCategories };
