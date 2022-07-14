@@ -1,9 +1,24 @@
 const { User } = require('../database/models');
 const jwtService = require('./jwt.service');
 
-const getAllUsers = async () => {
-  const result = await User.findAll();
-  return result;
+const createUser = async (body) => {
+  const { email } = body;
+  const checkIfEmailExists = await User.findOne({
+    where: {
+      email,
+    },
+  });
+
+  if (checkIfEmailExists) {
+    const error = new Error('User already registered');
+    error.name = 'ConflictError';
+    throw error;
+  }
+
+  const user = await User.create(body);
+  const token = jwtService.createToken(user);
+
+  return { token };
 };
 
 const userLogin = async (body) => {
@@ -19,10 +34,10 @@ const userLogin = async (body) => {
     error.name = 'ValidationError';
     throw error;
   }
-  
+
   const token = jwtService.createToken(user);
 
   return { token };
 };
 
-module.exports = { getAllUsers, userLogin };
+module.exports = { createUser, userLogin };
