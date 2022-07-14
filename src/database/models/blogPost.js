@@ -27,13 +27,17 @@ const createBlogPost = (sequelize, DataTypes) => {
     published: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updated: {
       allowNull: false,
       type: DataTypes.DATE,
-    }
+      defaultValue: DataTypes.NOW,
+    },
   }, {
-    tableName: 'BlogPosts'
+    tableName: 'BlogPosts',
+    updatedAt: 'updated',
+    createdAt: 'published',
   });
 
   BlogPost.associate = (models) => {

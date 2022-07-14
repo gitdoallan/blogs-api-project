@@ -20,14 +20,6 @@ const createPostCategory = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-    },
   }, {
     tableName: 'PostCategories'
   });
