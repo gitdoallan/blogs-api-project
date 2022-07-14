@@ -24,8 +24,16 @@ const createBlogPost = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
-    published: DataTypes.DATE,
-    updated: DataTypes.DATE,
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      field: 'published',
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      field: 'updated',
+    }
   }, {
     tableName: 'BlogPosts'
   });

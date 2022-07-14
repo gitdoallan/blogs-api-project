@@ -42,8 +42,6 @@ const validateToken = (req, _res, next) => {
     const { authorization } = req.headers;
     const token = authorization;
 
-    console.log('validateLoop!');
-
     if (!token) {
       const error = new Error('Token not found');
       error.name = 'UnauthorizedError';
