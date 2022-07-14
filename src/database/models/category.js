@@ -9,6 +9,8 @@ const createCategoryModel = (sequelize, DataTypes) =>{
       type: DataTypes.INTEGER,
     },
     name: DataTypes.STRING,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   }, {
     tableName: 'Categories'
   })

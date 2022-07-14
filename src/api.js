@@ -2,6 +2,8 @@ const express = require('express');
 require('express-async-errors');
 const userRouter = require('./routes/user.routes');
 const loginRouter = require('./routes/login.routes');
+const categoryRouter = require('./routes/categories.routes');
+const userMiddleware = require('./middleware/user.middleware');
 const errorMiddleware = require('./middleware/error.middleware');
 // ...
 
@@ -12,6 +14,10 @@ app.use(express.json());
 app.use('/login', loginRouter);
 
 app.use('/user', userRouter);
+
+app.use(userMiddleware.validateToken);
+
+app.use('/categories', categoryRouter);
 
 app.use(errorMiddleware);
 
