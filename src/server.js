@@ -6,7 +6,7 @@ const port = process.env.API_PORT || 3000;
 
 // não remova esse endpoint
 app.get('/', (_request, response) => {
-  response.send();
+  response.send('oi');
 });
 
 app.listen(port, () => console.log('ouvindo porta', port));

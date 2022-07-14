@@ -12,4 +12,9 @@ const userLogin = async (req, res) => {
   res.status(200).json(result);
 };
 
-module.exports = { createUser, userLogin };
+const getAllUsers = async (req, res) => {
+  const result = await userService.getAllUsers();
+  res.status(200).json(result);
+};
+
+module.exports = { createUser, userLogin, getAllUsers };

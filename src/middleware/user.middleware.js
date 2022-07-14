@@ -1,4 +1,6 @@
+require('dotenv/config');
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
 const validateLogin = (req, _res, next) => {
   const data = req.body;
@@ -14,7 +16,7 @@ if (error) {
   throw error;
 } 
 
-next(error);
+next();
 };
 
 const signUpValidation = (req, _res, next) => {
@@ -36,4 +38,24 @@ const signUpValidation = (req, _res, next) => {
   next();
 };
 
-module.exports = { validateLogin, signUpValidation };
+const validateToken = (req, _res, next) => {
+    const { authorization } = req.headers;
+    const token = authorization;
+
+    if (!token) {
+      const error = new Error('Token not found');
+      error.name = 'UnauthorizedError';
+      throw error;
+    }
+
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+    } catch (_err) {
+      const error = new Error('Expired or invalid token');
+      error.name = 'UnauthorizedError';
+      throw error;
+    }
+  next();
+};
+
+module.exports = { validateLogin, signUpValidation, validateToken };

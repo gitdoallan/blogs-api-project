@@ -12,15 +12,4 @@ const createToken = (user) => {
     return token;
 };
 
-const validateToken = (token) => {
-    try {
-      const { data } = jwt.verify(token, process.env.JWT_SECRET);
-      return data;
-    } catch (_err) {
-      const error = new Error('Invalid token');
-      error.name = 'UnauthorizedError';
-      throw error;
-    }
-};
-
-module.exports = { createToken, validateToken };
+module.exports = { createToken };
