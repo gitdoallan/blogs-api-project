@@ -15,9 +15,7 @@ app.use('/login', loginRouter);
 
 app.use('/user', userRouter);
 
-app.use(userMiddleware.validateToken);
-
-app.use('/categories', categoryRouter);
+app.use('/categories', userMiddleware.validateToken, categoryRouter);
 
 app.use(errorMiddleware);
 
